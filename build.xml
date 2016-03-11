@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<project name="PL/0 to JVM" default="compile">
+
+	<target name="clean" description="Remove compilation files">
+		<delete dir="build"/>
+	</target>
+
+	<target name="clean all" description="Remove compilation and JAR files">
+		<delete dir="build"/>
+		<delete dir="target"/>
+	</target>
+
+	<target name="compile" description="Compile Java files">
+		<mkdir dir="build"/>
+		<javac srcdir="src" destdir="build"/>
+	</target>
+
+	<target name="jar" depends="compile" description="Creates Java JAR package">
+		<jar destfile="target/pl0tojvm.jar">
+			<fileset dir="src" includes="**/*.class"/>
+            <manifest>
+                <attribute name="Main-Class" value="Compiler"/>
+            </manifest>
+        </jar>
+    </target>
+
+</project>
